@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Retorno de Inversión</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e90ff;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #1e90ff;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #1e90ff;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #1e90ff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #1c86ee;
+        }
+
+        .resultado {
+            font-weight: bold;
+            margin-top: 20px;
+            border: 1px solid #1e90ff;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Retorno de Inversión</h1>
+
+        <form id="formulario">
+            <label for="inversion">Inversión:</label>
+            <input type="number" id="inversion" name="inversion" min="0" required>
+
+            <label for="beneficio">Beneficio:</label>
+            <input type="number" id="beneficio" name="beneficio" min="0" required>
+
+            <button type="submit">Calcular ROI</button>
+        </form>
+
+        <div class="resultado" id="resultado"></div>
+    </div>
+
+    <script>
+        const formulario = document.getElementById('formulario');
+        const resultado = document.getElementById('resultado');
+
+        formulario.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const inversion = parseFloat(document.getElementById('inversion').value);
+            const beneficio = parseFloat(document.getElementById('beneficio').value);
+
+            if (isNaN(inversion) || isNaN(beneficio)) {
+                resultado.textContent = 'Error: Ingrese valores numéricos válidos.';
+                return;
+            }
+
+            const roi = (beneficio - inversion) / inversion * 100;
+
+            if (roi >= 0) {
+                resultado.textContent = `ROI: ${roi.toFixed(2)}%`;
+            } else {
+                resultado.textContent = `ROI: -${(-roi).toFixed(2)}% (Pérdida)`;
+            }
+        });
+    </script>
+</body>
+</html>
